@@ -1,0 +1,389 @@
+#!/usr/bin/env python3
+import sys
+import os
+import random
+import signal
+
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+from PySide2.QtCore import *
+from PySide2.QtGui import *
+from PySide2.QtWidgets import *
+
+cwd = os.path.dirname(os.path.realpath(__file__))
+RESOURCE_PATH = '.' if os.path.exists(os.path.join(cwd, 'icons')) and os.path.exists(os.path.join(cwd,'icons','dado.png')) else '/usr/share/alea'
+
+def _(*args, **kwargs):
+    return ' '.join(args)
+
+class MainWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.items = []
+        self.setWindowTitle(os.path.basename(sys.argv[0]))
+        self.window = QWidget(self)
+        self.layout = QGridLayout(self.window)
+        self.window.setLayout(self.layout)
+        self.objects = {}
+
+        self.objects['menu'] = QMenuBar(self)
+        self.setMenuBar(self.objects['menu'])
+        self.objects['menu'].setFixedHeight(32)
+        self.objects['menu'].setContentsMargins(0, 0, 0, 0)
+
+        self.objects['menu'].addSeparator()
+
+        self.objects['menu_data'] = QMenu(_("Data"), self)
+        self.objects['menu'].addMenu(self.objects['menu_data'])
+
+        self.objects['action_load'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'add.svg')), _("Load from file"), self)
+        self.objects['action_load'].triggered.connect(lambda : self.do_action(_("Load from file")))
+        self.objects['menu_data'].addAction(self.objects['action_load'])
+
+        self.objects['action_edit'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'compose.svg')), _("Edit data"), self)
+        self.objects['action_edit'].triggered.connect(lambda : self.do_action(_("Edit data")))
+        self.objects['action_edit'].setEnabled(False)
+        self.objects['menu_data'].addAction(self.objects['action_edit'])
+
+        self.objects['action_save'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'save.svg')), _("Save data to file"), self)
+        self.objects['action_save'].triggered.connect(lambda : self.do_action(_("Save data to file")))
+        self.objects['action_save'].setEnabled(False)
+        self.objects['menu_data'].addAction(self.objects['action_save'])
+
+        self.objects['action_clear'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'clear.svg')), _("Clear data"), self)
+        self.objects['action_clear'].triggered.connect(lambda : self.do_action(_("Clear data")))
+        self.objects['action_clear'].setEnabled(False)
+        self.objects['menu_data'].addAction(self.objects['action_clear'])
+
+        self.objects['menu_actions'] = QMenu(_("Actions"), self)
+        self.objects['menu'].addMenu(self.objects['menu_actions'])
+
+        self.objects['action_run'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'run.svg')), _("Run"), self)
+        self.objects['action_run'].triggered.connect(lambda : self.do_action(_("Run")))
+        self.objects['action_run'].setEnabled(False)
+        self.objects['menu_actions'].addAction(self.objects['action_run'])
+
+        self.objects['action_run_timed'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'timed.svg')), _("Run timed"), self)
+        self.objects['action_run_timed'].triggered.connect(lambda : self.do_action(_("Run timed")))
+        self.objects['action_run_timed'].setEnabled(False)
+        self.objects['menu_actions'].addAction(self.objects['action_run_timed'])
+
+        self.objects['action_quit'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'quit.svg')), _("Quit"), self)
+        self.objects['action_quit'].triggered.connect(lambda : self.do_action(_("Quit")))
+        self.objects['menu_actions'].addAction(self.objects['action_quit'])
+
+        self.objects['menu_help'] = QMenu(_("Help"), self)
+        self.objects['menu'].addMenu(self.objects['menu_help'])
+
+        self.objects['action_help'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'help.svg')), _("Help"), self)
+        self.objects['action_help'].triggered.connect(lambda : self.do_action(_("Help")))
+        self.objects['menu_help'].addAction(self.objects['action_help'])
+
+        self.objects['action_about'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'about.svg')), _("About"), self)
+        self.objects['action_about'].triggered.connect(lambda : self.do_action(_("About")))
+        self.objects['menu_help'].addAction(self.objects['action_about'])
+
+        self.objects['textedit_text'] = QTextEdit(self)
+        self.objects['textedit_text'].setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        self.objects['label_quiz'] = QLabel(self)
+        self.objects['label_quiz'].setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # self.objects['label_quiz'].setStyleSheet("background-color: #dddddd;")
+        self.objects['label_quiz'].setAlignment(Qt.AlignCenter|Qt.AlignVCenter)
+        self.objects['label_quiz'].hide()
+
+        self.objects['button_next'] = QToolButton(self)
+        self.objects['button_next'].setIcon(QIcon(f'{RESOURCE_PATH}/icons/dado.png'))
+        self.objects['button_next'].setIconSize(QSize(128, 128))
+        self.objects['button_next'].setToolButtonStyle(Qt.ToolButtonTextUnderIcon)
+        self.objects['button_next'].setText(_("Push for next item"))
+        self.objects['button_next'].clicked.connect(lambda : self.do_action(_("Push for next item")))
+        self.objects['button_next'].setStyleSheet("QToolButton { border: none; padding: 0px; }")
+        font = self.objects['button_next'].font()
+        font.setPixelSize(16)
+        self.objects['button_next'].setFont(font)
+        self.objects['button_next'].hide()
+
+        self.layout.addWidget(self.objects['textedit_text'], 0, 0, 1, 1)
+        self.objects['textedit_text'].textChanged.connect(lambda : self.do_action(_("Text changed")))
+        self.layout.addWidget(self.objects['label_quiz'], 0, 1, 1, 1)
+        self.layout.addWidget(self.objects['button_next'], 0, 2, 1, 1)
+        self.objects['progress'] = QProgressBar(self)
+        self.objects['progress'].setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.objects['progress'].setMaximum(100)
+        self.objects['progress'].setValue(0)
+        self.objects['progress'].setMinimum(0)
+        self.objects['progress'].setTextVisible(False)
+        self.objects['progress'].hide()
+        self.layout.addWidget(self.objects['progress'], 1, 0, 3, 3)
+        self.setCentralWidget(self.window)
+        self.setWindowIcon(QIcon(f'{RESOURCE_PATH}/icons/dado.png'))
+        self.idx = 0
+        self.setMinimumSize(QSize(320, 240))
+
+    def do_action(self, action):
+        if action == _("Load from file"):
+            if(self.load_from_file()):
+                self.objects['textedit_text'].show()
+                self.objects['label_quiz'].hide()
+                self.objects['button_next'].hide()
+                self.parse_text()
+        elif action == _("Edit data"):
+            self.period = 0
+            self.objects['textedit_text'].show()
+            self.objects['label_quiz'].hide()
+            self.objects['button_next'].hide()
+            self.objects['progress'].hide()
+            self.objects['action_load'].setEnabled(True)
+            self.objects['action_edit'].setEnabled(False)
+            self.showNormal()
+        elif action == _("Save data to file"):
+            self.save()
+        elif action == _("Clear data"):
+            self.clear()
+        elif action == _("Run"):
+            self.parse_text()
+            self.objects['action_run'].setEnabled(False)
+            self.objects['action_run_timed'].setEnabled(False)
+            self.objects['action_save'].setEnabled(False)
+            self.objects['action_edit'].setEnabled(True)
+            self.objects['action_clear'].setEnabled(False)
+            self.objects['action_load'].setEnabled(False)
+            self.objects['textedit_text'].hide()
+            self.objects['label_quiz'].show()
+            self.objects['button_next'].show()
+            self.showMaximized()
+            self.run()
+        elif action == _("Run timed"):
+            if self.ask_period():
+                self.objects['progress'].show()
+                self.do_action(_("Run"))
+        elif action == _("Quit"):
+            self.close()
+        elif action == _("Help"):
+            self.help()
+        elif action == _("About"):
+            self.about()
+        elif action == _("Push for next item"):
+            self.next()
+
+        if action in [_("Text changed"), _("Edit data")]:
+            if self.objects['textedit_text'].toPlainText() != "":
+                self.objects['action_run'].setEnabled(True)
+                self.objects['action_run_timed'].setEnabled(True)
+                self.objects['action_clear'].setEnabled(True)
+                self.objects['action_save'].setEnabled(True)
+            else:
+                self.objects['action_run'].setEnabled(False)
+                self.objects['action_run_timed'].setEnabled(False)
+                self.objects['action_clear'].setEnabled(False)
+                self.objects['action_save'].setEnabled(False)
+
+    def help(self):
+        QMessageBox.information(self, _("Help"), _("\n\nThis is a simple quiz application.\n\n"
+                                                   "This app aleatorizes values from a given list of strings.\n\n"
+                                                   "To start, press the menu \"Data\" and option \"Load from file\" to load a quiz from a file or enter values directly.\n\n"
+                                                   "Values can be as simple srings separated by commas or as a list of strings.\n\n"
+                                                   "Other values for the quiz can be image files written as filename strings relative or absolute paths.\n\n"
+                                                   "To run the quiz, press the menu \"Actions\" and option \"Run\" or \"Run timed\" for automatic run.\n\n"
+                                                   "To save the current list of quiz options, press the menu \"Data\" and option \"Save to file\".\n\n"
+                                                   "To change the quiz, press the button \"Next\" (dices icon) or any window zone.\n\n"
+                                                   "To clear the quiz, press the menu \"Actions\" and option \"Clear data\".\n\n"
+                                                   "To exit, press the button \"Quit\".\n\n"
+                                                   "Enjoy!"))
+
+    def about(self):
+        QMessageBox.about(self, _("About"), _("<h1>Alea</h1>\n<p>A random slideshow application</p>"))
+
+    def ask_period(self):
+        self.period = 0
+        (period, ok) = QInputDialog.getInt(self, _("How many seconds"), _("Run timed"), self.period, 5, 90)
+        if ok:
+            self.period = period
+            return True
+        return False
+
+    def clear(self):
+        self.items = []
+        self.objects['textedit_text'].clear()
+        self.objects['label_quiz'].clear()
+        self.objects['label_quiz'].hide()
+
+    def run(self):
+        self.objects['label_quiz'].setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.objects['label_quiz'].setText(_("Push the button to start"))
+        try: self._event_filter_installed
+        except:
+            self._event_filter_installed = True
+            self.installEventFilter(self)
+        self.items = []
+        # self.resize(self.geometry().width()+1, self.geometry().height()+1)
+        # self.resize(self.geometry().width()-1, self.geometry().height()-1)
+        # QTimer.singleShot(0, lambda: self.eventFilter(self, QResizeEvent(self.size(), self.size())))
+        try: self.period
+        except: self.period = 0
+
+    def eventFilter(self,obj,event):
+        if event.type() in [QEvent.Resize , QEvent.MouseButtonRelease]:
+            label = self.objects['label_quiz']
+            font = label.font()
+            font.setPointSize(10)
+            label.setFont(font)
+            if event.type() == QEvent.Resize:
+                self.next(False)
+            else:
+                self.next()
+            return True
+        return False
+
+    def image_to_label(self,imgurl):
+        label = self.objects['label_quiz']
+        pix = QPixmap(imgurl[7:])
+        label.setPixmap(pix.scaled(label.size(), Qt.KeepAspectRatio, Qt.SmoothTransformation))
+        return label
+
+    def next(self, do=True):
+        if not self.items:
+            text = self.objects['textedit_text'].toPlainText()
+            self.items = text.split('\n')
+        l = len(self.items)
+        label = self.objects['label_quiz']
+        if do:
+            self.idx = random.randint(0, l-1)
+            # self.idx += 1
+            item = '_'+self.items[self.idx%l]
+        else:
+            item = '_'+label.text()
+        if item.startswith('_file://'):
+            self.image_to_label(item[1:])
+            return
+        padding = 10 * 2
+        font = label.font()
+        font.setPointSize(10)
+        width = label.width() - padding
+        height = label.height() - padding
+        size = QFontMetrics(font).boundingRect(item)
+        psize=font.pointSize()
+        inc = 128
+        dx = width - size.width()
+        dy = height - size.height()
+        i=0
+        while inc > 2:
+            if dx < 0 or dy < 0 and (dx):
+                if inc > 1:
+                    inc = int(inc/2)
+                while psize - inc <= 0:
+                    inc = int(inc/2)
+                psize -= inc
+            else:
+                psize += inc
+            font.setPointSize(psize)
+            size = QFontMetrics(font).boundingRect(item)
+            i+=1
+            dx = width - size.width()
+            dy = height - size.height()
+        while dx < 0 or dy < 0:
+            psize -= 1
+            font.setPointSize(psize)
+            size = QFontMetrics(font).boundingRect(item)
+            i+=1
+            dx = width - size.width()
+            dy = height - size.height()
+        label.setFont(font)
+
+        #print('item= {} psize={} width={} iterations={} size={}'.format(item,self.objects['label_quiz'].font().pointSize(),self.objects['label_quiz'].width(),i,str(size)))
+        self.objects['label_quiz'].setText(item[1:])
+        if self.period != 0 and do:
+            self.progress(self.period,0,self.period)
+
+    def progress(self, value, min, max):
+        self.objects['progress'].setMinimum(min)
+        self.objects['progress'].setMaximum(max)
+        self.objects['progress'].setValue(value)
+        if value != min:
+            QTimer.singleShot(1000, lambda: self.progress(value-1,min,max))
+        else:
+            self.next()
+
+    def save(self):
+        filename = QFileDialog.getSaveFileName(self, _("Save file"), "", _("Text files (*.txt)"))
+        if filename[0] != "":
+            with open(filename[0], 'w') as f:
+                f.write(self.objects['textedit_text'].toPlainText())
+            return True
+        return False
+
+    def parse_text(self,text=None):
+        newtext = []
+        if text is None:
+            text = self.objects['textedit_text'].toPlainText()
+        text = text.split('\n')
+        need_recursion = False
+        for line in [ line for line in text if line.strip() != '' and line.strip()[0] != '#']:
+            rp_line = os.path.realpath(line)
+            if line.startswith('file://') or os.path.isfile(rp_line):
+                if line.lower()[:7] == 'file://':
+                    filename = line[7:]
+                else:
+                    filename = rp_line
+                rp_filename = os.path.realpath(filename)
+                if os.path.isfile(rp_filename):
+                    ext = filename.split('.')[-1]
+                    if ext.lower() == 'txt':
+                        with open(rp_filename, 'r') as f:
+                            for fileline in [ fline for fline in f.readlines() if fline.strip() != '' and fline.strip()[0] != '#' ]:
+                                fields = fileline.split(',')
+                                for field in fields:
+                                    f = field.strip().strip('"').strip("'")
+                                    if f[0] == '#':
+                                        break
+                                    rp_f = os.path.realpath(f)
+                                    if os.path.isfile(rp_f):
+                                        if 'file://'+rp_f not in newtext:
+                                            newtext.append(rp_f)
+                                            need_recursion = True
+                                    else:
+                                        if f.lower()[:7] == 'file://':
+                                            need_recursion = True
+                                        newtext.append(f)
+                    else:
+                        if rp_filename not in newtext:
+                            newtext.append(f'file://{os.path.realpath(filename)}')
+                else:
+                    newtext.append(line)
+            else:
+                fields = line.split(',')
+                for field in fields:
+                    f = field.strip().strip('"').strip("'")
+                    if os.path.isfile(os.path.realpath(f)) and not os.path.realpath in newtext:
+                        newtext.append(f'file://{os.path.realpath(f)}')
+                        need_recursion = True
+                    else:
+                        newtext.append(f)
+        newtext = sorted(list(set(newtext)))
+        if need_recursion:
+            self.parse_text(text = "\n".join(newtext))
+        else:
+            self.objects['textedit_text'].setText("\n".join(newtext))
+
+
+    def load_from_file(self):
+        filenames = QFileDialog.getOpenFileNames(self, _("Open file"), "", f'{_("Images or text files")} (*.txt *.png *.jpg *.gif)')
+        if filenames[0]:
+            for file in filenames[0]:
+                textedit = self.objects['textedit_text']
+                ext = os.path.basename(file).split('.')[-1].lower()
+                if ext in ['png', 'jpg', 'gif', 'txt']:
+                    textedit.setText(textedit.toPlainText()+f'\nfile://{os.path.realpath(file)}')
+            return True
+        return False
+
+def main():
+    app = QApplication([])
+    window = MainWindow()
+    window.show()
+    app.exec_()
+
+# main
+if __name__ == '__main__':
+    main()

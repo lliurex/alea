@@ -1,0 +1,23 @@
+Gallina
+Gallo
+Vaca lechera
+Oveja
+Cabra
+Caballo
+Cerdo
+Asno o burro
+Conejo
+Patos
+Ocas
+Buey
+Búfala
+Llama
+Poni
+Reno
+Toro
+Codorniz
+Ganso
+Pavo
+Perdiz
+Gato
+Perro

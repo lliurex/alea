@@ -1,0 +1,26 @@
+Caballo
+Vaca
+Cerdo
+León
+Chimpasé
+Canguro
+Conejo
+Jirafa
+Elefante
+Gato
+Ratón
+Murciélago
+Ballena
+Delfín
+Orca
+Cachalote
+Perro
+Koala
+Oveja
+Oso
+Burro
+Rinoceronte
+Boa
+Serpiente marina
+Tritón
+Salamandra
