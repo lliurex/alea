@@ -4,4 +4,7 @@ icons usr/share/alea/
 translations/es/* usr/share/locale/es/LC_MESSAGES/
 translations/en/* usr/share/locale/en/LC_MESSAGES/
 translations/ca/* usr/share/locale/ca/LC_MESSAGES/
+net.lliurex.alea.desktop usr/share/applications/
+icons/alea.png usr/share/icons/
+
 
