@@ -1,0 +1,162 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-02 18:41+0200\n"
+"PO-Revision-Date: 2022-05-02 18:51+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+
+#: alea:36
+msgid "Data"
+msgstr "Datos"
+
+#: alea:39 alea:40 alea:125
+msgid "Load from file"
+msgstr "Cargar de fichero"
+
+#: alea:43 alea:44 alea:131 alea:170
+msgid "Edit data"
+msgstr "Edición de datos"
+
+#: alea:48 alea:49 alea:140
+msgid "Save data to file"
+msgstr "Guardar datos a fichero"
+
+#: alea:53 alea:54 alea:142
+msgid "Clear data"
+msgstr "Borrar datos"
+
+#: alea:58
+msgid "Actions"
+msgstr "Acciones"
+
+#: alea:61 alea:62 alea:144 alea:160
+msgid "Run"
+msgstr "Comenzar"
+
+#: alea:66 alea:67 alea:157 alea:200
+msgid "Run timed"
+msgstr "Comenzar con temporizador"
+
+#: alea:71 alea:72 alea:161
+msgid "Quit"
+msgstr "Salir"
+
+#: alea:75 alea:78 alea:79 alea:163 alea:183
+msgid "Help"
+msgstr "Ayuda"
+
+#: alea:82 alea:83 alea:165 alea:196
+msgid "About"
+msgstr "Acerca de"
+
+#: alea:99 alea:100 alea:167
+msgid "Push for next item"
+msgstr "Pulsar para el siguiente elemento"
+
+#: alea:108 alea:170
+msgid "Text changed"
+msgstr "Texto cambiado"
+
+#: alea:183
+msgid ""
+"\n"
+"\n"
+"This is a simple quiz application.\n"
+"\n"
+"This app aleatorizes values from a given list of strings.\n"
+"\n"
+"To start, press the menu \"Data\" and option \"Load from file\" to load a "
+"quiz from a file or enter values directly.\n"
+"\n"
+"Values can be as simple srings separated by commas or as a list of strings.\n"
+"\n"
+"Other values for the quiz can be image files written as filename strings "
+"relative or absolute paths.\n"
+"\n"
+"To run the quiz, press the menu \"Actions\" and option \"Run\" or \"Run timed"
+"\" for automatic run.\n"
+"\n"
+"To save the current list of quiz options, press the menu \"Data\" and option "
+"\"Save to file\".\n"
+"\n"
+"To change the quiz, press the button \"Next\" (dices icon) or any window "
+"zone.\n"
+"\n"
+"To clear the quiz, press the menu \"Actions\" and option \"Clear data\".\n"
+"\n"
+"To exit, press the button \"Quit\".\n"
+"\n"
+"Enjoy!"
+msgstr ""
+"\n"
+"\n"
+"Esta es una aplicación para cuestionarios sencillos.\n"
+"\n"
+"Esta aplicación aleatoriza los valores de una lista dada de cadenas.\n"
+"\n"
+"Para comenzar, presione el menú \"Datos\" y la opción \"Cargar desde archivo"
+"\" para cargar un cuestionario desde un archivo o ingresar valores "
+"directamente.\n"
+"\n"
+"Los valores pueden ser cadenas simples separadas por comas o una lista de "
+"cadenas.\n"
+"\n"
+"Otros valores para el cuestionario pueden ser archivos de imagen escritos "
+"como cadenas de nombre de archivo, rutas relativas o absolutas.\n"
+"\n"
+"Para ejecutar el cuestionario, presione el menú \"Acciones\" y la opción "
+"\"Ejecutar\" o \"Ejecutar con temporizador\" para la ejecución automática.\n"
+"\n"
+"Para guardar la lista actual de opciones de prueba, presione el menú \"Datos"
+"\" y la opción \"Guardar en archivo\".\n"
+"\n"
+"Para cambiar la prueba, presione el botón \"Siguiente\" (icono de dados) o "
+"cualquier zona de la ventana.\n"
+"\n"
+"Para borrar el cuestionario, presione el menú \"Acciones\" y la opción "
+"\"Borrar datos\".\n"
+"\n"
+"Para salir, presione el botón \"Salir\".\n"
+"\n"
+"¡Disfrute!"
+
+#: alea:196
+msgid ""
+"<h1>Alea</h1>\n"
+"<p>A random slideshow application</p>"
+msgstr ""
+"<h1>Alea</h1>\n"
+"<p>Una aplicación de presentación de diapositivas al azar</p>"
+
+#: alea:200
+msgid "How many seconds"
+msgstr "¿Cuantos segundos?"
+
+#: alea:214
+msgid "Push the button to start"
+msgstr "Pulsar el boton para comenzar"
+
+#: alea:309
+msgid "Save file"
+msgstr "Guardar fichero"
+
+#: alea:309
+msgid "Text files (*.txt)"
+msgstr "Archivos de texto (*.txt)"
+
+#: alea:371
+msgid "Open file"
+msgstr "Abrir fichero"

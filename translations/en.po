@@ -1,0 +1,129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-02 18:41+0200\n"
+"PO-Revision-Date: 2022-05-02 18:53+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+#: alea:36
+msgid "Data"
+msgstr ""
+
+#: alea:39 alea:40 alea:125
+msgid "Load from file"
+msgstr ""
+
+#: alea:43 alea:44 alea:131 alea:170
+msgid "Edit data"
+msgstr ""
+
+#: alea:48 alea:49 alea:140
+msgid "Save data to file"
+msgstr ""
+
+#: alea:53 alea:54 alea:142
+msgid "Clear data"
+msgstr ""
+
+#: alea:58
+msgid "Actions"
+msgstr ""
+
+#: alea:61 alea:62 alea:144 alea:160
+msgid "Run"
+msgstr ""
+
+#: alea:66 alea:67 alea:157 alea:200
+msgid "Run timed"
+msgstr ""
+
+#: alea:71 alea:72 alea:161
+msgid "Quit"
+msgstr ""
+
+#: alea:75 alea:78 alea:79 alea:163 alea:183
+msgid "Help"
+msgstr ""
+
+#: alea:82 alea:83 alea:165 alea:196
+msgid "About"
+msgstr ""
+
+#: alea:99 alea:100 alea:167
+msgid "Push for next item"
+msgstr ""
+
+#: alea:108 alea:170
+msgid "Text changed"
+msgstr ""
+
+#: alea:183
+msgid ""
+"\n"
+"\n"
+"This is a simple quiz application.\n"
+"\n"
+"This app aleatorizes values from a given list of strings.\n"
+"\n"
+"To start, press the menu \"Data\" and option \"Load from file\" to load a "
+"quiz from a file or enter values directly.\n"
+"\n"
+"Values can be as simple srings separated by commas or as a list of strings.\n"
+"\n"
+"Other values for the quiz can be image files written as filename strings "
+"relative or absolute paths.\n"
+"\n"
+"To run the quiz, press the menu \"Actions\" and option \"Run\" or \"Run timed"
+"\" for automatic run.\n"
+"\n"
+"To save the current list of quiz options, press the menu \"Data\" and option "
+"\"Save to file\".\n"
+"\n"
+"To change the quiz, press the button \"Next\" (dices icon) or any window "
+"zone.\n"
+"\n"
+"To clear the quiz, press the menu \"Actions\" and option \"Clear data\".\n"
+"\n"
+"To exit, press the button \"Quit\".\n"
+"\n"
+"Enjoy!"
+msgstr ""
+
+#: alea:196
+msgid ""
+"<h1>Alea</h1>\n"
+"<p>A random slideshow application</p>"
+msgstr ""
+
+#: alea:200
+msgid "How many seconds"
+msgstr ""
+
+#: alea:214
+msgid "Push the button to start"
+msgstr ""
+
+#: alea:309
+msgid "Save file"
+msgstr ""
+
+#: alea:309
+msgid "Text files (*.txt)"
+msgstr ""
+
+#: alea:371
+msgid "Open file"
+msgstr ""
