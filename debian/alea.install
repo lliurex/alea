@@ -1,7 +1,7 @@
 alea usr/bin/
 resources usr/share/alea/
 icons usr/share/alea/
-translations/es/ usr/share/locale/es/LC_MESSAGES/
-translations/en/ usr/share/locale/en/LC_MESSAGES/
-translations/ca/ usr/share/locale/ca/LC_MESSAGES/
+translations/es/* usr/share/locale/es/LC_MESSAGES/
+translations/en/* usr/share/locale/en/LC_MESSAGES/
+translations/ca/* usr/share/locale/ca/LC_MESSAGES/
 
