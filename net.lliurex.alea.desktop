@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Exec=alea
+Icon=alea
+MimeType=application/x-alea-quiz;
+Terminal=false
+Name=Alea
+Name[ca]=Alea
+Name[ca@valencia]=Alea
+Name[en_GB]=Alea
+Name[es]=Alea
+Categories=Qt;KDE;Utils;
+X-DBUS-ServiceName=net.lliurex.alea
