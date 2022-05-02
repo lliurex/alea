@@ -3,6 +3,9 @@ import sys
 import os
 import random
 import signal
+import gettext
+gt=gettext.translation('alea').install()
+_ = gt.gettext
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
@@ -13,8 +16,8 @@ from PySide2.QtWidgets import *
 cwd = os.path.dirname(os.path.realpath(__file__))
 RESOURCE_PATH = '.' if os.path.exists(os.path.join(cwd, 'icons')) and os.path.exists(os.path.join(cwd,'icons','dado.png')) else '/usr/share/alea'
 
-def _(*args, **kwargs):
-    return ' '.join(args)
+# def _(*args, **kwargs):
+#     return ' '.join(args)
 
 class MainWindow(QMainWindow):
     def __init__(self):
