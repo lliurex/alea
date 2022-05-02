@@ -4,7 +4,7 @@ import os
 import random
 import signal
 import gettext
-gt=gettext.translation('alea').install()
+gt=gettext.translation('alea',localedir='/usr/share/locale').install()
 _ = gt.gettext
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
