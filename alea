@@ -29,6 +29,10 @@ class MainWindow(QMainWindow):
         self.layout = QGridLayout(self.window)
         self.window.setLayout(self.layout)
         self.objects = {}
+        self.is_started = False
+        self.is_stopped = False
+        self.waiting = False
+        self.is_timed = None
 
         self.objects['menu'] = QMenuBar(self)
         self.setMenuBar(self.objects['menu'])
@@ -71,6 +75,16 @@ class MainWindow(QMainWindow):
         self.objects['action_run_timed'].triggered.connect(lambda : self.do_action(_("Run timed")))
         self.objects['action_run_timed'].setEnabled(False)
         self.objects['menu_actions'].addAction(self.objects['action_run_timed'])
+
+        self.objects['action_stop'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'stop.svg')), _("Stop"), self)
+        self.objects['action_stop'].triggered.connect(lambda : self.do_action(_("Stop")))
+        self.objects['action_stop'].setEnabled(False)
+        self.objects['menu_actions'].addAction(self.objects['action_stop'])
+
+        self.objects['action_continue'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'continue.svg')), _("Continue"), self)
+        self.objects['action_continue'].triggered.connect(lambda : self.do_action(_("Continue")))
+        self.objects['action_continue'].setEnabled(False)
+        self.objects['menu_actions'].addAction(self.objects['action_continue'])
 
         self.objects['action_quit'] = QAction(QIcon(os.path.join(RESOURCE_PATH, 'icons', 'quit.svg')), _("Quit"), self)
         self.objects['action_quit'].triggered.connect(lambda : self.do_action(_("Quit")))
@@ -125,7 +139,7 @@ class MainWindow(QMainWindow):
         self.idx = 0
         self.setMinimumSize(QSize(320, 240))
 
-    def do_action(self, action):
+    def do_action(self, action=''):
         if action == _("Load from file"):
             if(self.load_from_file()):
                 self.objects['textedit_text'].show()
@@ -134,6 +148,7 @@ class MainWindow(QMainWindow):
                 self.parse_text()
         elif action == _("Edit data"):
             self.period = 0
+            self.is_timed = None
             self.objects['textedit_text'].show()
             self.objects['label_quiz'].hide()
             self.objects['button_next'].hide()
@@ -147,6 +162,8 @@ class MainWindow(QMainWindow):
             self.clear()
         elif action == _("Run"):
             self.parse_text()
+            if self.is_timed is None:
+                self.is_timed = False
             self.objects['action_run'].setEnabled(False)
             self.objects['action_run_timed'].setEnabled(False)
             self.objects['action_save'].setEnabled(False)
@@ -160,8 +177,17 @@ class MainWindow(QMainWindow):
             self.run()
         elif action == _("Run timed"):
             if self.ask_period():
+                self.is_timed = True
                 self.objects['progress'].show()
                 self.do_action(_("Run"))
+        elif action == _("Stop"):
+            self.stop_counter()
+            self.objects['action_stop'].setEnabled(False)
+            self.objects['action_continue'].setEnabled(True)
+        elif action == _("Continue"):
+            self.continue_counter()
+            self.objects['action_continue'].setEnabled(False)
+            self.objects['action_stop'].setEnabled(True)
         elif action == _("Quit"):
             self.close()
         elif action == _("Help"):
@@ -182,6 +208,10 @@ class MainWindow(QMainWindow):
                 self.objects['action_run_timed'].setEnabled(False)
                 self.objects['action_clear'].setEnabled(False)
                 self.objects['action_save'].setEnabled(False)
+        else:
+            if self.is_started:
+                self.objects['action_stop'].setEnabled(not self.is_stopped and self.is_timed)
+                self.objects['action_continue'].setEnabled(self.is_stopped and self.is_timed)
 
     def help(self):
         QMessageBox.information(self, _("Help"), _("\n\nThis is a simple quiz application.\n\n"
@@ -231,12 +261,15 @@ class MainWindow(QMainWindow):
         if event.type() in [QEvent.Resize , QEvent.MouseButtonRelease]:
             label = self.objects['label_quiz']
             font = label.font()
-            font.setPointSize(10)
-            label.setFont(font)
             if event.type() == QEvent.Resize:
+                font.setPointSize(10)
+                label.setFont(font)
                 self.next(False)
             else:
-                self.next()
+                if not self.waiting:
+                    font.setPointSize(10)
+                    label.setFont(font)
+                    self.next()
             return True
         return False
 
@@ -247,17 +280,24 @@ class MainWindow(QMainWindow):
         return label
 
     def next(self, do=True):
+        if self.waiting:
+            return
         if not self.items:
             text = self.objects['textedit_text'].toPlainText()
             self.items = text.split('\n')
         l = len(self.items)
         label = self.objects['label_quiz']
         if do:
-            self.idx = random.randint(0, l-1)
+            self.is_started = True
+            self.do_action()
+            old_idx = self.idx
+            while old_idx == self.idx:
+                self.idx = random.randint(0, l-1)
             # self.idx += 1
             item = '_'+self.items[self.idx%l]
         else:
             item = '_'+label.text()
+        print(item)
         if item.startswith('_file://'):
             self.image_to_label(item[1:])
             return
@@ -300,12 +340,26 @@ class MainWindow(QMainWindow):
         if self.period != 0 and do:
             self.progress(self.period,0,self.period)
 
+    def stop_counter(self):
+        self.is_stopped = True
+
+    def continue_counter(self):
+        self.is_stopped = False
+
     def progress(self, value, min, max):
-        self.objects['progress'].setMinimum(min)
-        self.objects['progress'].setMaximum(max)
-        self.objects['progress'].setValue(value)
+        if not self.is_stopped:
+            self.objects['progress'].setMinimum(min)
+            self.objects['progress'].setMaximum(max)
+            self.objects['progress'].setValue(value)
+        if value == max:
+            self.waiting = True
+        if value == min:
+            self.waiting = False
         if value != min:
-            QTimer.singleShot(1000, lambda: self.progress(value-1,min,max))
+            if self.is_stopped:
+                QTimer.singleShot(1000, lambda: self.progress(value,min,max))
+            else:
+                QTimer.singleShot(1000, lambda: self.progress(value-1,min,max))
         else:
             self.next()
 
