@@ -7,70 +7,78 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-02 18:41+0200\n"
-"PO-Revision-Date: 2022-05-02 18:51+0200\n"
+"POT-Creation-Date: 2022-05-19 11:10+0200\n"
+"PO-Revision-Date: 2022-05-19 11:17+0200\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es\n"
 
-#: alea:36
+#: alea:44
 msgid "Data"
 msgstr "Datos"
 
-#: alea:39 alea:40 alea:125
+#: alea:47 alea:48 alea:143
 msgid "Load from file"
 msgstr "Cargar de fichero"
 
-#: alea:43 alea:44 alea:131 alea:170
+#: alea:51 alea:52 alea:149 alea:200
 msgid "Edit data"
 msgstr "Edición de datos"
 
-#: alea:48 alea:49 alea:140
+#: alea:56 alea:57 alea:159
 msgid "Save data to file"
 msgstr "Guardar datos a fichero"
 
-#: alea:53 alea:54 alea:142
+#: alea:61 alea:62 alea:161
 msgid "Clear data"
 msgstr "Borrar datos"
 
-#: alea:58
+#: alea:66
 msgid "Actions"
 msgstr "Acciones"
 
-#: alea:61 alea:62 alea:144 alea:160
+#: alea:69 alea:70 alea:163 alea:182
 msgid "Run"
 msgstr "Comenzar"
 
-#: alea:66 alea:67 alea:157 alea:200
+#: alea:74 alea:75 alea:178 alea:234
 msgid "Run timed"
 msgstr "Comenzar con temporizador"
 
-#: alea:71 alea:72 alea:161
+#: alea:79 alea:80 alea:183
+msgid "Stop"
+msgstr "Parar"
+
+#: alea:84 alea:85 alea:187
+msgid "Continue"
+msgstr "Continuar"
+
+#: alea:89 alea:90 alea:191
 msgid "Quit"
 msgstr "Salir"
 
-#: alea:75 alea:78 alea:79 alea:163 alea:183
+#: alea:93 alea:96 alea:97 alea:193 alea:217
 msgid "Help"
 msgstr "Ayuda"
 
-#: alea:82 alea:83 alea:165 alea:196
+#: alea:100 alea:101 alea:195 alea:230
 msgid "About"
 msgstr "Acerca de"
 
-#: alea:99 alea:100 alea:167
+#: alea:117 alea:118 alea:197
 msgid "Push for next item"
 msgstr "Pulsar para el siguiente elemento"
 
-#: alea:108 alea:170
+#: alea:126 alea:200
 msgid "Text changed"
 msgstr "Texto cambiado"
 
-#: alea:183
+#: alea:217
 msgid ""
 "\n"
 "\n"
@@ -133,7 +141,7 @@ msgstr ""
 "\n"
 "¡Disfrute!"
 
-#: alea:196
+#: alea:230
 msgid ""
 "<h1>Alea</h1>\n"
 "<p>A random slideshow application</p>"
@@ -141,22 +149,22 @@ msgstr ""
 "<h1>Alea</h1>\n"
 "<p>Una aplicación de presentación de diapositivas al azar</p>"
 
-#: alea:200
+#: alea:234
 msgid "How many seconds"
 msgstr "¿Cuantos segundos?"
 
-#: alea:214
+#: alea:248
 msgid "Push the button to start"
 msgstr "Pulsar el boton para comenzar"
 
-#: alea:309
+#: alea:367
 msgid "Save file"
 msgstr "Guardar fichero"
 
-#: alea:309
+#: alea:367
 msgid "Text files (*.txt)"
 msgstr "Archivos de texto (*.txt)"
 
-#: alea:371
+#: alea:429
 msgid "Open file"
 msgstr "Abrir fichero"

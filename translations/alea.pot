@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-02 18:41+0200\n"
+"POT-Creation-Date: 2022-05-19 11:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,59 +17,67 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: alea:36
+#: alea:44
 msgid "Data"
 msgstr ""
 
-#: alea:39 alea:40 alea:125
+#: alea:47 alea:48 alea:143
 msgid "Load from file"
 msgstr ""
 
-#: alea:43 alea:44 alea:131 alea:170
+#: alea:51 alea:52 alea:149 alea:200
 msgid "Edit data"
 msgstr ""
 
-#: alea:48 alea:49 alea:140
+#: alea:56 alea:57 alea:159
 msgid "Save data to file"
 msgstr ""
 
-#: alea:53 alea:54 alea:142
+#: alea:61 alea:62 alea:161
 msgid "Clear data"
 msgstr ""
 
-#: alea:58
+#: alea:66
 msgid "Actions"
 msgstr ""
 
-#: alea:61 alea:62 alea:144 alea:160
+#: alea:69 alea:70 alea:163 alea:182
 msgid "Run"
 msgstr ""
 
-#: alea:66 alea:67 alea:157 alea:200
+#: alea:74 alea:75 alea:178 alea:234
 msgid "Run timed"
 msgstr ""
 
-#: alea:71 alea:72 alea:161
+#: alea:79 alea:80 alea:183
+msgid "Stop"
+msgstr ""
+
+#: alea:84 alea:85 alea:187
+msgid "Continue"
+msgstr ""
+
+#: alea:89 alea:90 alea:191
 msgid "Quit"
 msgstr ""
 
-#: alea:75 alea:78 alea:79 alea:163 alea:183
+#: alea:93 alea:96 alea:97 alea:193 alea:217
 msgid "Help"
 msgstr ""
 
-#: alea:82 alea:83 alea:165 alea:196
+#: alea:100 alea:101 alea:195 alea:230
 msgid "About"
 msgstr ""
 
-#: alea:99 alea:100 alea:167
+#: alea:117 alea:118 alea:197
 msgid "Push for next item"
 msgstr ""
 
-#: alea:108 alea:170
+#: alea:126 alea:200
 msgid "Text changed"
 msgstr ""
 
-#: alea:183
+#: alea:217
 msgid ""
 "\n"
 "\n"
@@ -101,28 +109,28 @@ msgid ""
 "Enjoy!"
 msgstr ""
 
-#: alea:196
+#: alea:230
 msgid ""
 "<h1>Alea</h1>\n"
 "<p>A random slideshow application</p>"
 msgstr ""
 
-#: alea:200
+#: alea:234
 msgid "How many seconds"
 msgstr ""
 
-#: alea:214
+#: alea:248
 msgid "Push the button to start"
 msgstr ""
 
-#: alea:309
+#: alea:367
 msgid "Save file"
 msgstr ""
 
-#: alea:309
+#: alea:367
 msgid "Text files (*.txt)"
 msgstr ""
 
-#: alea:371
+#: alea:429
 msgid "Open file"
 msgstr ""
