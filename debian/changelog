@@ -1,3 +1,9 @@
+alea (0.2.1) focal; urgency=medium
+
+  * Fix desktop category and icon
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Thu, 26 May 2022 09:56:06 +0200
+
 alea (0.2) focal; urgency=medium
 
   * Add stop/continue options
