@@ -33,6 +33,7 @@ class MainWindow(QMainWindow):
         self.is_stopped = False
         self.waiting = False
         self.is_timed = None
+        self.initialized = False
 
         self.objects['menu'] = QMenuBar(self)
         self.setMenuBar(self.objects['menu'])
@@ -138,6 +139,19 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(f'{RESOURCE_PATH}/icons/dado.png'))
         self.idx = 0
         self.setMinimumSize(QSize(320, 240))
+        if os.path.isfile('/usr/share/alea/resources/letras/letras.txt'):
+            self.objects['textedit_text'].setText(_('SEE {} for SYNTAX EXAMPLE').format('/usr/share/alea/resources/letras/letras.txt')+f'\nfile://{os.path.realpath("/usr/share/alea/resources/letras/letras.txt")}')
+            self.parse_text()
+
+    def keyReleaseEvent(self,event):
+        if event.key() == Qt.Key_Escape:
+            self.objects['action_edit'].trigger()
+        elif event.key() == Qt.Key_F5:
+            self.objects['action_run'].trigger()
+        elif event.key() == Qt.Key_F7:
+            self.objects['action_run_timed'].trigger()
+        elif self.initialized and (event.key() == Qt.Key_Space or event.key() == Qt.Key_Return):
+            self.next()
 
     def do_action(self, action=''):
         if action == _("Load from file"):
@@ -149,6 +163,11 @@ class MainWindow(QMainWindow):
         elif action == _("Edit data"):
             self.period = 0
             self.is_timed = None
+            self.cancel_counter()
+            self.removeEventFilter(self)
+            self.initialized = False
+            del self._event_filter_installed
+            self.objects['textedit_text'].setReadOnly(False)
             self.objects['textedit_text'].show()
             self.objects['label_quiz'].hide()
             self.objects['button_next'].hide()
@@ -171,10 +190,11 @@ class MainWindow(QMainWindow):
             self.objects['action_clear'].setEnabled(False)
             self.objects['action_load'].setEnabled(False)
             self.objects['textedit_text'].hide()
+            self.objects['textedit_text'].setReadOnly(True)
             self.objects['label_quiz'].show()
             self.objects['button_next'].show()
-            self.showMaximized()
             self.run()
+            self.showMaximized()
         elif action == _("Run timed"):
             if self.ask_period():
                 self.is_timed = True
@@ -210,8 +230,12 @@ class MainWindow(QMainWindow):
                 self.objects['action_save'].setEnabled(False)
         else:
             if self.is_started:
-                self.objects['action_stop'].setEnabled(not self.is_stopped and self.is_timed)
-                self.objects['action_continue'].setEnabled(self.is_stopped and self.is_timed)
+                try:
+                    self.objects['action_stop'].setEnabled(not self.is_stopped and self.is_timed)
+                    self.objects['action_continue'].setEnabled(self.is_stopped and self.is_timed)
+                except:
+                    pass
+        # app.processEvents()
 
     def help(self):
         QMessageBox.information(self, _("Help"), _("\n\nThis is a simple quiz application.\n\n"
@@ -246,7 +270,8 @@ class MainWindow(QMainWindow):
     def run(self):
         self.objects['label_quiz'].setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.objects['label_quiz'].setText(_("Push the button to start"))
-        try: self._event_filter_installed
+        try:
+            self._event_filter_installed
         except:
             self._event_filter_installed = True
             self.installEventFilter(self)
@@ -265,6 +290,7 @@ class MainWindow(QMainWindow):
                 font.setPointSize(10)
                 label.setFont(font)
                 self.next(False)
+                self.initialized = True
             else:
                 if not self.waiting:
                     font.setPointSize(10)
@@ -297,47 +323,48 @@ class MainWindow(QMainWindow):
             item = '_'+self.items[self.idx%l]
         else:
             item = '_'+label.text()
-        print(item)
+        # print(item)
         if item.startswith('_file://'):
             self.image_to_label(item[1:])
-            return
-        padding = 10 * 2
-        font = label.font()
-        font.setPointSize(10)
-        width = label.width() - padding
-        height = label.height() - padding
-        size = QFontMetrics(font).boundingRect(item)
-        psize=font.pointSize()
-        inc = 128
-        dx = width - size.width()
-        dy = height - size.height()
-        i=0
-        while inc > 2:
-            if dx < 0 or dy < 0 and (dx):
-                if inc > 1:
-                    inc = int(inc/2)
-                while psize - inc <= 0:
-                    inc = int(inc/2)
-                psize -= inc
-            else:
-                psize += inc
-            font.setPointSize(psize)
+        else:
+            padding = 10 * 2
+            font = label.font()
+            font.setPointSize(10)
+            width = label.width() - padding
+            height = label.height() - padding
             size = QFontMetrics(font).boundingRect(item)
-            i+=1
+            psize=font.pointSize()
+            inc = 128
             dx = width - size.width()
             dy = height - size.height()
-        while dx < 0 or dy < 0:
-            psize -= 1
-            font.setPointSize(psize)
-            size = QFontMetrics(font).boundingRect(item)
-            i+=1
-            dx = width - size.width()
-            dy = height - size.height()
-        label.setFont(font)
+            i=0
+            while inc > 2:
+                if dx < 0 or dy < 0 and (dx):
+                    if inc > 1:
+                        inc = int(inc/2)
+                    while psize - inc <= 0:
+                        inc = int(inc/2)
+                    psize -= inc
+                else:
+                    psize += inc
+                font.setPointSize(psize)
+                size = QFontMetrics(font).boundingRect(item)
+                i+=1
+                dx = width - size.width()
+                dy = height - size.height()
+            while dx < 0 or dy < 0:
+                psize -= 1
+                font.setPointSize(psize)
+                size = QFontMetrics(font).boundingRect(item)
+                i+=1
+                dx = width - size.width()
+                dy = height - size.height()
+            label.setFont(font)
 
-        #print('item= {} psize={} width={} iterations={} size={}'.format(item,self.objects['label_quiz'].font().pointSize(),self.objects['label_quiz'].width(),i,str(size)))
-        self.objects['label_quiz'].setText(item[1:])
+            #print('item= {} psize={} width={} iterations={} size={}'.format(item,self.objects['label_quiz'].font().pointSize(),self.objects['label_quiz'].width(),i,str(size)))
+            self.objects['label_quiz'].setText(item[1:])
         if self.period != 0 and do:
+            self.cancel_now = False
             self.progress(self.period,0,self.period)
 
     def stop_counter(self):
@@ -346,7 +373,19 @@ class MainWindow(QMainWindow):
     def continue_counter(self):
         self.is_stopped = False
 
+    def cancel_counter(self):
+        self.cancel_now = True
+        self.waiting = False
+        self.is_started = False
+        self.is_stopped = False
+        self.is_timed = None
+        self.initialized = False
+
     def progress(self, value, min, max):
+        if self.cancel_now:
+            self.objects['progress'].setValue(self.objects['progress'].maximum())
+            self.cancel_now = False
+            return
         if not self.is_stopped:
             self.objects['progress'].setMinimum(min)
             self.objects['progress'].setMaximum(max)
@@ -372,13 +411,19 @@ class MainWindow(QMainWindow):
         return False
 
     def parse_text(self,text=None):
+        global recursive_files
+        if text is None:
+            recursive_files = []
         newtext = []
         if text is None:
             text = self.objects['textedit_text'].toPlainText()
         text = text.split('\n')
         need_recursion = False
         for line in [ line for line in text if line.strip() != '' and line.strip()[0] != '#']:
-            rp_line = os.path.realpath(line)
+            if line.startswith('file://'):
+                rp_line = os.path.realpath(line[7:])
+            else:
+                rp_line = os.path.realpath(line)
             if line.startswith('file://') or os.path.isfile(rp_line):
                 if line.lower()[:7] == 'file://':
                     filename = line[7:]
@@ -389,19 +434,30 @@ class MainWindow(QMainWindow):
                     ext = filename.split('.')[-1]
                     if ext.lower() == 'txt':
                         with open(rp_filename, 'r') as f:
+                            recursive_files.append(rp_filename)
+                            filename_cwd = os.path.dirname(rp_filename)
                             for fileline in [ fline for fline in f.readlines() if fline.strip() != '' and fline.strip()[0] != '#' ]:
                                 fields = fileline.split(',')
                                 for field in fields:
                                     f = field.strip().strip('"').strip("'")
                                     if f[0] == '#':
-                                        break
+                                        continue
+                                    f = f.split('#')[0].strip()
+                                    if f.startswith('file://') and not f.startswith('file:///'):
+                                        f = f[7:]
                                     rp_f = os.path.realpath(f)
                                     if os.path.isfile(rp_f):
-                                        if 'file://'+rp_f not in newtext:
-                                            newtext.append(rp_f)
-                                            need_recursion = True
+                                        if 'file://'+rp_f not in newtext  and rp_f not in recursive_files:
+                                            newtext.append('file://'+rp_f)
+                                            if rp_f.split('.')[-1].lower() == 'txt':
+                                                need_recursion = True
+                                    elif os.path.isfile(os.path.join(filename_cwd,f)):
+                                        if 'file://'+os.path.join(filename_cwd,f) not in newtext and os.path.join(filename_cwd,f) not in recursive_files:
+                                            newtext.append('file://'+os.path.join(filename_cwd,f))
+                                            if os.path.join(filename_cwd,f).split('.')[-1].lower() == 'txt' and os.path.join(filename_cwd,f) != rp_filename:
+                                                need_recursion = True
                                     else:
-                                        if f.lower()[:7] == 'file://':
+                                        if f.lower()[:7] == 'file://' and f.split('.')[-1].lower() == 'txt':
                                             need_recursion = True
                                         newtext.append(f)
                     else:
@@ -424,9 +480,8 @@ class MainWindow(QMainWindow):
         else:
             self.objects['textedit_text'].setText("\n".join(newtext))
 
-
     def load_from_file(self):
-        filenames = QFileDialog.getOpenFileNames(self, _("Open file"), "", f'{_("Images or text files")} (*.txt *.png *.jpg *.gif)')
+        filenames = QFileDialog.getOpenFileNames(self, _("Open file"), "/usr/share/alea/resources", f'{_("Images or text files")} (*.txt *.png *.jpg *.gif)')
         if filenames[0]:
             for file in filenames[0]:
                 textedit = self.objects['textedit_text']
@@ -437,6 +492,7 @@ class MainWindow(QMainWindow):
         return False
 
 def main():
+    global app
     app = QApplication([])
     window = MainWindow()
     window.show()
