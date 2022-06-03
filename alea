@@ -426,7 +426,7 @@ class MainWindow(QMainWindow):
 
 
     def load_from_file(self):
-        filenames = QFileDialog.getOpenFileNames(self, _("Open file"), "", f'{_("Images or text files")} (*.txt *.png *.jpg *.gif)')
+        filenames = QFileDialog.getOpenFileNames(self, _("Open file"), "/usr/share/alea/resources", f'{_("Images or text files")} (*.txt *.png *.jpg *.gif)')
         if filenames[0]:
             for file in filenames[0]:
                 textedit = self.objects['textedit_text']
