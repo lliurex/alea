@@ -138,6 +138,9 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(f'{RESOURCE_PATH}/icons/dado.png'))
         self.idx = 0
         self.setMinimumSize(QSize(320, 240))
+        if os.path.isfile('/usr/share/alea/resources/letras/letras.txt'):
+            self.objects['textedit_text'].setText(_('SEE {} for SYNTAX EXAMPLE').format('/usr/share/alea/resources/letras/letras.txt')+f'\nfile://{os.path.realpath("/usr/share/alea/resources/letras/letras.txt")}')
+            self.parse_text()
 
     def do_action(self, action=''):
         if action == _("Load from file"):
