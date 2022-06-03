@@ -1,3 +1,12 @@
+alea (0.3) focal; urgency=medium
+
+  * Allow keybindings
+  * Load default resource from installed resources dir on startup
+  * Updated example & test file from resources
+  * Default file picker opening on resources dir
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Fri, 03 Jun 2022 17:14:32 +0200
+
 alea (0.2.1) focal; urgency=medium
 
   * Fix desktop category and icon
