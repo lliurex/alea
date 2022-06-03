@@ -1,0 +1,5 @@
+letras.txt
+eñe
+eme
+ele
+file://otras_letras.txt #prevent recursion,otras_letras.txt,/usr/share/alea/resources/letras/otras_letras.txt

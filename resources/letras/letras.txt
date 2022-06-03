@@ -1,0 +1,25 @@
+a.jpg # path relative to this dir
+file:///usr/share/alea/resources/letras/b.jpg # url with absolute path
+/usr/share/alea/resources/letras/c.jpg # full path
+file://d.jpg # url with relative path
+# comment line
+e.jpg,f.jpg # more comment,#another comment,g.jpg
+# f.jpg, g.jpg <-- full line commented
+h.jpg,file://i.jpg,file:///usr/share/alea/resources/letras/j.jpg
+otras_letras.txt
+k.jpg
+l.jpg
+m.jpg
+n.jpg
+o.jpg
+p.jpg
+q.jpg
+r.jpg
+s.jpg
+t.jpg
+u.jpg
+v.jpg
+w.jpg
+x.jpg
+y.jpg
+z.jpg
