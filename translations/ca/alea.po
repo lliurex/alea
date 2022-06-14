@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-05-19 11:10+0200\n"
-"PO-Revision-Date: 2022-05-19 11:19+0200\n"
+"PO-Revision-Date: 2022-06-14 12:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -20,35 +20,35 @@ msgstr ""
 
 #: alea:44
 msgid "Data"
-msgstr "Datos"
+msgstr "Dades"
 
 #: alea:47 alea:48 alea:143
 msgid "Load from file"
-msgstr "Cargar de fichero"
+msgstr "Càrrega des de fitxer"
 
 #: alea:51 alea:52 alea:149 alea:200
 msgid "Edit data"
-msgstr "Edición de datos"
+msgstr "Edició de dades"
 
 #: alea:56 alea:57 alea:159
 msgid "Save data to file"
-msgstr "Guardar datos a fichero"
+msgstr "Guarda dades en fitxer"
 
 #: alea:61 alea:62 alea:161
 msgid "Clear data"
-msgstr "Borrar datos"
+msgstr "Esborra les dades"
 
 #: alea:66
 msgid "Actions"
-msgstr "Acciones"
+msgstr "Accions"
 
 #: alea:69 alea:70 alea:163 alea:182
 msgid "Run"
-msgstr "Comenzar"
+msgstr "Comença"
 
 #: alea:74 alea:75 alea:178 alea:234
 msgid "Run timed"
-msgstr "Comenzar con temporizador"
+msgstr "Comença amb temporitzador"
 
 #: alea:79 alea:80 alea:183
 msgid "Stop"
@@ -60,23 +60,23 @@ msgstr "Continua"
 
 #: alea:89 alea:90 alea:191
 msgid "Quit"
-msgstr "Salir"
+msgstr "Ix"
 
 #: alea:93 alea:96 alea:97 alea:193 alea:217
 msgid "Help"
-msgstr "Ayuda"
+msgstr "Ajuda"
 
 #: alea:100 alea:101 alea:195 alea:230
 msgid "About"
-msgstr "Acerca de"
+msgstr "Sobre"
 
 #: alea:117 alea:118 alea:197
 msgid "Push for next item"
-msgstr "Pulsar para el siguiente elemento"
+msgstr "Premeu per al següent element"
 
 #: alea:126 alea:200
 msgid "Text changed"
-msgstr "Texto cambiado"
+msgstr "Text canviat"
 
 #: alea:217
 msgid ""
@@ -86,22 +86,17 @@ msgid ""
 "\n"
 "This app aleatorizes values from a given list of strings.\n"
 "\n"
-"To start, press the menu \"Data\" and option \"Load from file\" to load a "
-"quiz from a file or enter values directly.\n"
+"To start, press the menu \"Data\" and option \"Load from file\" to load a quiz from a file or enter values directly.\n"
 "\n"
 "Values can be as simple srings separated by commas or as a list of strings.\n"
 "\n"
-"Other values for the quiz can be image files written as filename strings "
-"relative or absolute paths.\n"
+"Other values for the quiz can be image files written as filename strings relative or absolute paths.\n"
 "\n"
-"To run the quiz, press the menu \"Actions\" and option \"Run\" or \"Run timed"
-"\" for automatic run.\n"
+"To run the quiz, press the menu \"Actions\" and option \"Run\" or \"Run timed\" for automatic run.\n"
 "\n"
-"To save the current list of quiz options, press the menu \"Data\" and option "
-"\"Save to file\".\n"
+"To save the current list of quiz options, press the menu \"Data\" and option \"Save to file\".\n"
 "\n"
-"To change the quiz, press the button \"Next\" (dices icon) or any window "
-"zone.\n"
+"To change the quiz, press the button \"Next\" (dices icon) or any window zone.\n"
 "\n"
 "To clear the quiz, press the menu \"Actions\" and option \"Clear data\".\n"
 "\n"
@@ -111,35 +106,27 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Esta es una aplicación para cuestionarios sencillos.\n"
+"Aquesta és una aplicació per a qüestionaris senzills.\n"
 "\n"
-"Esta aplicación aleatoriza los valores de una lista dada de cadenas.\n"
+"Aquesta aplicació aleatoritza els valors d’una llista donada de cadenes.\n"
 "\n"
-"Para comenzar, presione el menú \"Datos\" y la opción \"Cargar desde archivo"
-"\" para cargar un cuestionario desde un archivo o ingresar valores "
-"directamente.\n"
+"Per a començar, premeu el menú ”Dades” i l’opció ”Càrrega des de fitxer” per a carregar un qüestionari des d’un fitxer o introduir valors directament.\n"
 "\n"
-"Los valores pueden ser cadenas simples separadas por comas o una lista de "
-"cadenas.\n"
+"Els valors poden ser cadenes simples separades per comes o una llista de cadenes.\n"
 "\n"
-"Otros valores para el cuestionario pueden ser archivos de imagen escritos "
-"como cadenas de nombre de archivo, rutas relativas o absolutas.\n"
+"Uns altres valors per al qüestionari poden ser fitxers d’imatge escrits com a cadenes de nom d’arxiu, rutes relatives o absolutes.\n"
 "\n"
-"Para ejecutar el cuestionario, presione el menú \"Acciones\" y la opción "
-"\"Ejecutar\" o \"Ejecutar con temporizador\" para la ejecución automática.\n"
+"Per a executar el qüestionari, premeu el menú ”Accions” i l’opció ”Executa” o ”Executa amb temporitzador” per a l’execució automàtica.\n"
 "\n"
-"Para guardar la lista actual de opciones de prueba, presione el menú \"Datos"
-"\" y la opción \"Guardar en archivo\".\n"
+"Per a guardar la llista actual d’opcions de prova, premeu el menú ”Dades” i l’opció ”Guarda en fitxer”.\n"
 "\n"
-"Para cambiar la prueba, presione el botón \"Siguiente\" (icono de dados) o "
-"cualquier zona de la ventana.\n"
+"Per a canviar la prova, premeu el botó ”Següent” (icona de dades) o qualsevol zona de la finestra.\n"
 "\n"
-"Para borrar el cuestionario, presione el menú \"Acciones\" y la opción "
-"\"Borrar datos\".\n"
+"Per a esborrar el qüestionari, premeu el menú ”Accions” i l’opció ”Esborra dades”.\n"
 "\n"
-"Para salir, presione el botón \"Salir\".\n"
+"Per a eixir, premeu el botó ”Ix”.\n"
 "\n"
-"¡Disfrute!"
+"Gaudiu!"
 
 #: alea:230
 msgid ""
@@ -147,24 +134,24 @@ msgid ""
 "<p>A random slideshow application</p>"
 msgstr ""
 "<h1>Alea</h1>\n"
-"<p>Una aplicación de presentación de diapositivas al azar</p>"
+"<p>Una aplicació de presentació de diapositives a l'atzar</p>"
 
 #: alea:234
 msgid "How many seconds"
-msgstr "¿Cuantos segundos?"
+msgstr "Quants segons"
 
 #: alea:248
 msgid "Push the button to start"
-msgstr "Pulsar el boton para comenzar"
+msgstr "Premeu el botó per a començar"
 
 #: alea:367
 msgid "Save file"
-msgstr "Guardar fichero"
+msgstr "Guarda el fitxer"
 
 #: alea:367
 msgid "Text files (*.txt)"
-msgstr "Archivos de texto (*.txt)"
+msgstr "Fitxers de text (*.txt)"
 
 #: alea:429
 msgid "Open file"
-msgstr "Abrir fichero"
+msgstr "Obri el fitxer"
