@@ -1,0 +1,35 @@
+alea (0.3.1) focal; urgency=medium
+
+  * Updated ca translation
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Tue, 14 Jun 2022 12:54:25 +0200
+
+alea (0.3) focal; urgency=medium
+
+  * Allow keybindings
+  * Load default resource from installed resources dir on startup
+  * Updated example & test file from resources
+  * Default file picker opening on resources dir
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Fri, 03 Jun 2022 17:14:32 +0200
+
+alea (0.2.1) focal; urgency=medium
+
+  * Fix desktop category and icon
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Thu, 26 May 2022 09:56:06 +0200
+
+alea (0.2) focal; urgency=medium
+
+  * Add stop/continue options
+  * Prevent multiple timed runnings
+  * Updated translations
+  * Prevent consecutive repetition of same item
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Thu, 19 May 2022 11:22:25 +0200
+
+alea (0.1) focal; urgency=medium
+
+  * Initial Release.
+
+ -- M.Angel Juan <m.angel.juan@gmail.com>  Mon, 02 May 2022 17:23:55 +0200
