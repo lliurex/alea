@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+<id>net.lliurex.alea</id>
+<metadata_license>CC0-1.0</metadata_license>
+<name xml:lang="ca@valencia">Alea</name>
+<name xml:lang="es">Alea</name>
+<name xml:lang="ca">Alea</name>
+<name>Alea</name>
+<name xml:lang="en_GB">Alea</name>
+<summary>Simple app for quizs</summary>
+<summary xml:lang="es">Aplicación para cuestionarios simples</summary>
+<summary xml:lang="ca">Aquesta és una aplicació per a qüestionaris senzills</summary>
+<description>
+<p>Among other things this app randomize values for a given list of strings</p>
+<p xml:lang="es">Entre otras funciones esta aplicación aleatoriza los valores de una lista dada de cadenas</p>
+<p xml:lang="ca">Entre altres coses aquesta aplicació aleatoritza els valors d’una llista donada de cadenes</p>
+</description>
+<categories>
+<category>Classroom</category>
+<category>KDE</category>
+<category>Qt</category>
+</categories>
+<icon type="stock">alea</icon>
+<provides><binary>alea</binary></provides>
+<keywords>
+<keyword>net</keyword>
+<keyword>Alea</keyword>
+<keyword>quiz</keyword>
+<keyword>test</keyword>
+<keyword>examen</keyword>
+</keywords>
+<launchable type="desktop-id">net.lliurex.alea.desktop</launchable>
+</component>
