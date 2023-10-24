@@ -9,5 +9,5 @@ Name[ca]=Alea
 Name[ca@valencia]=Alea
 Name[en_GB]=Alea
 Name[es]=Alea
-Categories=Qt;KDE;Classroom;
+Categories=Qt;KDE;Classroom;Education
 X-DBUS-ServiceName=net.lliurex.alea
